@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pitols — Three Apps, One Desktop</title>
+<meta name="description" content="Pitols is three apps in one: Daily Space for notes and reminders, Interface Customization to personalize your desktop, and Metrics to watch your system live. Bilingual (English & Arabic), local-only, zero tracking. Coming to the Microsoft Store on October 1, 2026.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { sans: ['Inter','system-ui','sans-serif'], ar: ['Tajawal','system-ui','sans-serif'], mono: ['"JetBrains Mono"','monospace'] },
+      colors: { ink:'#070a12', panel:'#0f1522', edge:'#1e2636',
+                brand:{DEFAULT:'#38bdf8',deep:'#0ea5e9',glow:'#7dd3fc'}, plum:'#a78bfa', mint:'#34d399' },
+    } },
+  };
+</script>
+<style>
+  body { background-color: #070a12; }
+  [dir="rtl"] body, [dir="rtl"] { font-family: 'Tajawal', system-ui, sans-serif; }
+  .grid-bg { background-image:
+      linear-gradient(to right, rgba(56,189,248,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56,189,248,.06) 1px, transparent 1px);
+      background-size: 46px 46px; }
+  .radial-glow { background: radial-gradient(60% 55% at 50% 0%, rgba(56,189,248,.18) 0%, rgba(56,189,248,0) 70%); }
+  .card-hover { transition: transform .2s ease, border-color .2s ease, background-color .2s ease; }
+  .card-hover:hover { transform: translateY(-4px); border-color: rgba(56,189,248,.45); background-color: #121a2b; }
+  .mock { background:
+      radial-gradient(120% 120% at 100% 0%, rgba(56,189,248,.20), transparent 55%),
+      radial-gradient(120% 120% at 0% 100%, rgba(167,139,250,.18), transparent 55%), #0c1220; }
+  /* RTL fixes for physical utilities used on the page */
+  [dir="rtl"] .ml-auto { margin-left: 0; margin-right: auto; }
+  [dir="rtl"] ol.steps, [dir="rtl"] ul.bullets { padding-left: 0; padding-right: 1.25rem; }
+  ol.steps { list-style: none; padding-left: 0; }
+</style>
+</head>
+<body class="bg-ink text-slate-300 font-sans antialiased selection:bg-brand/30">
+
+  <!-- Nav -->
+  <header class="sticky top-0 z-30 border-b border-edge/70 bg-ink/80 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#top" class="flex items-center gap-2.5">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-brand-deep font-mono text-sm font-bold text-ink">P</span>
+        <span class="text-lg font-bold tracking-tight text-white">Pitols</span>
+      </a>
+      <nav class="hidden items-center gap-7 text-sm font-medium text-slate-400 md:flex">
+        <a href="#apps" class="hover:text-white" data-en="The 3 apps" data-ar="التطبيقات الثلاثة">The 3 apps</a>
+        <a href="#guide" class="hover:text-white" data-en="User guide" data-ar="دليل المستخدم">User guide</a>
+        <a href="#experience" class="hover:text-white" data-en="Experience" data-ar="التجربة">Experience</a>
+        <a href="#launch" class="hover:text-white" data-en="Launch" data-ar="الإطلاق">Launch</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button id="langToggle" class="rounded-lg border border-edge px-3 py-2 text-sm font-semibold text-slate-300 hover:border-brand/40 hover:text-white" aria-label="Toggle language">ع</button>
+        <a href="#launch" class="rounded-lg border border-brand/40 bg-brand/10 px-4 py-2 text-sm font-semibold text-brand-glow hover:bg-brand/20">Oct 1, 2026</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg"></div>
+    <div class="absolute inset-0 radial-glow"></div>
+    <div class="relative mx-auto max-w-6xl px-5 pt-20 pb-16 text-center md:pt-28">
+      <span class="inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-400"
+            data-en="Windows 10 & 11 · English & Arabic" data-ar="ويندوز 10 و 11 · العربية والإنجليزية">Windows 10 &amp; 11 · English &amp; Arabic</span>
+      <h1 class="mx-auto mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white md:text-6xl">
+        <span data-en="Three apps." data-ar="ثلاثة تطبيقات.">Three apps.</span>
+        <span class="bg-gradient-to-r from-brand-glow to-brand-deep bg-clip-text text-transparent" data-en="One Pitols." data-ar="بيتولز واحد.">One Pitols.</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-400"
+         data-en="Pitols brings together three complete apps in one: Daily Space for notes and reminders, Interface Customization to personalize your desktop, and Metrics to watch your system live. Use each on its own — or all together."
+         data-ar="يجمع بيتولز ثلاثة تطبيقات كاملة في واحد: «مساحة اليوم» للملاحظات والتذكيرات، و«تخصيص الواجهة» لتخصيص سطح مكتبك، و«بيانات» لمراقبة جهازك مباشرة. استخدم كلًّا منها وحده — أو جميعها معًا.">
+         Pitols brings together three complete apps in one: Daily Space for notes and reminders, Interface Customization to personalize your desktop, and Metrics to watch your system live. Use each on its own — or all together.</p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <!-- Replace with your Store listing URL at launch: https://apps.microsoft.com/detail/9P1XQB72XNPR -->
+        <a href="#launch" class="rounded-xl bg-gradient-to-r from-brand to-brand-deep px-6 py-3.5 font-semibold text-ink shadow-lg shadow-brand/20 hover:brightness-110"
+           data-en="Coming to Microsoft Store — Oct 1, 2026" data-ar="قريبًا على متجر مايكروسوفت — 1 أكتوبر 2026">Coming to Microsoft Store — Oct 1, 2026</a>
+        <a href="#apps" class="rounded-xl border border-edge px-6 py-3.5 font-semibold text-slate-300 hover:border-brand/40 hover:text-white"
+           data-en="Meet the three apps" data-ar="تعرّف على التطبيقات الثلاثة">Meet the three apps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-in-1 explainer -->
+  <section id="apps" class="mx-auto max-w-6xl px-5 pb-4">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand" data-en="One app, three inside" data-ar="تطبيق واحد، ثلاثة بداخله">One app, three inside</p>
+      <h2 class="mt-3 text-3xl font-bold text-white md:text-4xl" data-en="A 3-in-1 desktop suite" data-ar="حزمة سطح مكتب 3 في 1">A 3-in-1 desktop suite</h2>
+      <p class="mt-4 text-slate-400"
+         data-en="One purchase gives you three full apps. Open them together from one home, or launch any one on its own as a standalone window — whatever suits the moment."
+         data-ar="شراء واحد يمنحك ثلاثة تطبيقات كاملة. افتحها معًا من واجهة واحدة، أو شغّل أيًّا منها وحده في نافذة مستقلة — كما يناسبك.">One purchase gives you three full apps. Open them together from one home, or launch any one on its own as a standalone window — whatever suits the moment.</p>
+    </div>
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      <a href="#app-daily" class="card-hover rounded-2xl border border-edge bg-panel p-6">
+        <div class="grid h-11 w-11 place-items-center rounded-xl bg-plum/10 text-plum">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+        </div>
+        <h3 class="mt-5 text-lg font-semibold text-white">مساحة اليوم</h3>
+        <p class="text-sm font-medium text-slate-500" data-en="Daily Space" data-ar="مساحة اليوم">Daily Space</p>
+        <p class="mt-2 text-sm text-slate-400" data-en="Notes, reminders and ideas — with images, media and sticky notes." data-ar="ملاحظات وتذكيرات وأفكار — مع صور ووسائط وملاحظات لاصقة.">Notes, reminders and ideas — with images, media and sticky notes.</p>
+        <span class="mt-4 inline-block text-sm font-medium text-plum" data-en="Explore →" data-ar="استكشف ←">Explore →</span>
+      </a>
+      <a href="#app-interface" class="card-hover rounded-2xl border border-edge bg-panel p-6">
+        <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand/10 text-brand">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15h18"/><path d="M9 21h6"/></svg>
+        </div>
+        <h3 class="mt-5 text-lg font-semibold text-white">تخصيص الواجهة</h3>
+        <p class="text-sm font-medium text-slate-500" data-en="Interface Customization" data-ar="تخصيص الواجهة">Interface Customization</p>
+        <p class="mt-2 text-sm text-slate-400" data-en="Personalize your whole desktop — taskbar, wallpaper, cursors, sounds and widgets." data-ar="خصّص سطح مكتبك بالكامل — شريط المهام والخلفية والمؤشر والأصوات والأدوات.">Personalize your whole desktop — taskbar, wallpaper, cursors, sounds and widgets.</p>
+        <span class="mt-4 inline-block text-sm font-medium text-brand" data-en="Explore →" data-ar="استكشف ←">Explore →</span>
+      </a>
+      <a href="#app-metrics" class="card-hover rounded-2xl border border-edge bg-panel p-6">
+        <div class="grid h-11 w-11 place-items-center rounded-xl bg-mint/10 text-mint">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><rect x="7" y="11" width="3" height="5"/><rect x="12" y="8" width="3" height="8"/><rect x="17" y="13" width="3" height="3"/></svg>
+        </div>
+        <h3 class="mt-5 text-lg font-semibold text-white">بيانات</h3>
+        <p class="text-sm font-medium text-slate-500" data-en="Metrics / Data" data-ar="بيانات">Metrics / Data</p>
+        <p class="mt-2 text-sm text-slate-400" data-en="Watch your PC live — performance and resource use, at a glance." data-ar="راقب جهازك مباشرة — الأداء واستهلاك الموارد بلمحة واحدة.">Watch your PC live — performance and resource use, at a glance.</p>
+        <span class="mt-4 inline-block text-sm font-medium text-mint" data-en="Explore →" data-ar="استكشف ←">Explore →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Launch countdown -->
+  <section id="launch" class="relative mt-12 border-y border-edge/70 bg-panel/60">
+    <div class="mx-auto max-w-6xl px-5 py-16 text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand" data-en="Launch showcase" data-ar="موعد الإطلاق">Launch showcase</p>
+      <h2 class="mt-3 text-3xl font-bold text-white md:text-4xl" data-en="Arriving on the Microsoft Store" data-ar="يصل إلى متجر مايكروسوفت">Arriving on the Microsoft Store</h2>
+      <p class="mt-3 text-slate-400" data-en="October 1st, 2026" data-ar="1 أكتوبر 2026">October 1st, 2026</p>
+      <div id="countdown" class="mx-auto mt-10 grid max-w-2xl grid-cols-4 gap-3 sm:gap-5">
+        <div class="rounded-2xl border border-edge bg-ink/60 p-4 sm:p-6"><div id="cd-days" class="font-mono text-3xl font-bold text-white sm:text-5xl">--</div><div class="mt-2 text-xs uppercase tracking-wider text-slate-500" data-en="Days" data-ar="أيام">Days</div></div>
+        <div class="rounded-2xl border border-edge bg-ink/60 p-4 sm:p-6"><div id="cd-hours" class="font-mono text-3xl font-bold text-white sm:text-5xl">--</div><div class="mt-2 text-xs uppercase tracking-wider text-slate-500" data-en="Hours" data-ar="ساعات">Hours</div></div>
+        <div class="rounded-2xl border border-edge bg-ink/60 p-4 sm:p-6"><div id="cd-mins" class="font-mono text-3xl font-bold text-white sm:text-5xl">--</div><div class="mt-2 text-xs uppercase tracking-wider text-slate-500" data-en="Minutes" data-ar="دقائق">Minutes</div></div>
+        <div class="rounded-2xl border border-edge bg-ink/60 p-4 sm:p-6"><div id="cd-secs" class="font-mono text-3xl font-bold text-white sm:text-5xl">--</div><div class="mt-2 text-xs uppercase tracking-wider text-slate-500" data-en="Seconds" data-ar="ثوانٍ">Seconds</div></div>
+      </div>
+      <p id="launched" class="mt-8 hidden text-xl font-semibold text-brand-glow" data-en="🎉 Pitols is now available on the Microsoft Store!" data-ar="🎉 بيتولز متاح الآن على متجر مايكروسوفت!">🎉 Pitols is now available on the Microsoft Store!</p>
+    </div>
+  </section>
+
+  <!-- APP 1 — DAILY SPACE -->
+  <section id="app-daily" class="border-b border-edge/70">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <span class="font-mono text-sm font-semibold text-plum">App 01 · مساحة اليوم · Daily Space</span>
+          <h3 class="mt-2 text-2xl font-bold text-white md:text-3xl" data-en="Notes, reminders & your day" data-ar="ملاحظات وتذكيرات ويومك">Notes, reminders &amp; your day</h3>
+          <p class="mt-4 text-slate-400"
+             data-en="A calm, beautiful home for everything you want to remember. Write rich notes and add images, video and audio. Organize them into colorful, icon-tagged categories, and set reminders that notify you at the right time. Keep private notes and folders behind a lock, and pin your most important notes to the desktop as sticky notes."
+             data-ar="مساحة هادئة وجميلة لكل ما تريد تذكّره. اكتب ملاحظات غنية وأضف الصور والفيديو والصوت. نظّمها في فئات ملوّنة بأيقونات، واضبط تذكيرات تنبّهك في الوقت المناسب. احفظ الملاحظات والمجلدات الخاصة خلف قفل، وثبّت أهم ملاحظاتك على سطح المكتب كملاحظات لاصقة.">A calm, beautiful home for everything you want to remember. Write rich notes and add images, video and audio. Organize them into colorful, icon-tagged categories, and set reminders that notify you at the right time. Keep private notes and folders behind a lock, and pin your most important notes to the desktop as sticky notes.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Rich notes with media" data-ar="ملاحظات غنية بالوسائط">Rich notes with media</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Categories & colors" data-ar="فئات وألوان">Categories &amp; colors</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Reminders" data-ar="تذكيرات">Reminders</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Private locked notes" data-ar="ملاحظات مقفلة خاصة">Private locked notes</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Desktop sticky notes" data-ar="ملاحظات لاصقة على المكتب">Desktop sticky notes</span>
+          </div>
+        </div>
+        <!-- Decorative preview — swap for a real screenshot when you have one -->
+        <div class="mock aspect-[4/3] rounded-2xl border border-edge p-4 shadow-2xl shadow-black/40">
+          <div class="flex h-full gap-3 rounded-xl border border-white/5 bg-black/20 p-4">
+            <div class="w-1/3 space-y-2"><div class="h-6 rounded-md bg-plum/40"></div><div class="h-4 rounded bg-white/10"></div><div class="h-4 rounded bg-white/10"></div><div class="h-4 w-2/3 rounded bg-white/10"></div></div>
+            <div class="flex-1 space-y-2 rounded-lg border border-white/10 bg-white/5 p-3"><div class="h-3 w-1/2 rounded bg-white/20"></div><div class="h-16 rounded-md bg-gradient-to-br from-plum/30 to-brand/20"></div><div class="h-3 rounded bg-white/10"></div><div class="h-3 w-4/5 rounded bg-white/10"></div><div class="mt-1 flex gap-2"><span class="h-5 w-12 rounded-full bg-plum/40"></span><span class="h-5 w-10 rounded-full bg-white/10"></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP 2 — INTERFACE CUSTOMIZATION -->
+  <section id="app-interface" class="border-b border-edge/70 bg-panel/40">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <!-- Decorative preview — swap for a real screenshot when you have one -->
+        <div class="mock order-last aspect-[4/3] rounded-2xl border border-edge p-4 shadow-2xl shadow-black/40 lg:order-first">
+          <div class="flex h-full flex-col justify-between rounded-xl border border-white/5 bg-black/20 p-4">
+            <div class="space-y-2"><div class="h-24 rounded-lg bg-gradient-to-br from-brand/30 to-plum/20"></div><div class="flex gap-2"><div class="h-3 w-24 rounded bg-white/10"></div><div class="h-3 w-14 rounded bg-white/10"></div></div></div>
+            <div class="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-2.5"><div class="h-6 w-6 rounded-md bg-brand/50"></div><div class="h-6 w-6 rounded-md bg-white/15"></div><div class="h-6 w-6 rounded-md bg-white/15"></div><div class="ml-auto h-3 w-16 rounded bg-white/15"></div></div>
+          </div>
+        </div>
+        <div>
+          <span class="font-mono text-sm font-semibold text-brand">App 02 · تخصيص الواجهة · Interface Customization</span>
+          <h3 class="mt-2 text-2xl font-bold text-white md:text-3xl" data-en="Personalize your whole desktop" data-ar="خصّص سطح مكتبك بالكامل">Personalize your whole desktop</h3>
+          <p class="mt-4 text-slate-400"
+             data-en="Your all-in-one makeover studio. Design your own taskbar, set living wallpapers and search a world of images with the built-in Pexels engine, give your PC a signature with custom sound themes, and restyle your pointer with animated cursors. Every change previews instantly and undoes just as easily."
+             data-ar="استوديو التخصيص الشامل. صمّم شريط مهامك، واضبط خلفيات حية وابحث في عالم من الصور عبر محرك Pexels المدمج، وامنح جهازك طابعًا خاصًا بحزم أصوات مخصّصة، وأعد تصميم مؤشرك بمؤشرات متحرّكة. كل تغيير يظهر فورًا ويُلغى بسهولة.">Your all-in-one makeover studio. Design your own taskbar, set living wallpapers and search a world of images with the built-in Pexels engine, give your PC a signature with custom sound themes, and restyle your pointer with animated cursors. Every change previews instantly and undoes just as easily.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Custom taskbar & auto-hide" data-ar="شريط مهام مخصّص وإخفاء تلقائي">Custom taskbar &amp; auto-hide</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Living wallpapers + Pexels" data-ar="خلفيات حية + Pexels">Living wallpapers + Pexels</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Sound themes" data-ar="حزم أصوات">Sound themes</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Animated cursors" data-ar="مؤشرات متحرّكة">Animated cursors</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP 3 — METRICS -->
+  <section id="app-metrics" class="border-b border-edge/70">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <span class="font-mono text-sm font-semibold text-mint">App 03 · بيانات · Metrics</span>
+          <h3 class="mt-2 text-2xl font-bold text-white md:text-3xl" data-en="Watch your PC, live" data-ar="راقب جهازك مباشرة">Watch your PC, live</h3>
+          <p class="mt-4 text-slate-400"
+             data-en="A clear, real-time view of how your computer is performing. See your frame rate and resource use at a glance, each shown with its current value alongside its low, high and hourly average. Send any panel straight to your desktop as a live widget and keep an eye on it while you work or play."
+             data-ar="عرض واضح ولحظي لأداء جهازك. شاهد معدّل الإطارات واستهلاك الموارد بلمحة، مع عرض القيمة الحالية إلى جانب الأدنى والأعلى والمعدّل بالساعة. أرسل أي لوحة مباشرة إلى سطح مكتبك كأداة حيّة وتابعها أثناء عملك أو لعبك.">A clear, real-time view of how your computer is performing. See your frame rate and resource use at a glance, each shown with its current value alongside its low, high and hourly average. Send any panel straight to your desktop as a live widget and keep an eye on it while you work or play.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Live frame rate" data-ar="معدّل إطارات حي">Live frame rate</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Resource usage" data-ar="استهلاك الموارد">Resource usage</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Current · min · max · average" data-ar="الحالي · الأدنى · الأعلى · المعدّل">Current · min · max · average</span>
+            <span class="rounded-full border border-edge bg-panel px-3 py-1 text-xs text-slate-300" data-en="Send to desktop widget" data-ar="إرسال كأداة على المكتب">Send to desktop widget</span>
+          </div>
+        </div>
+        <!-- Decorative preview — swap for a real screenshot when you have one -->
+        <div class="mock aspect-[4/3] rounded-2xl border border-edge p-4 shadow-2xl shadow-black/40">
+          <div class="grid h-full grid-rows-2 gap-3">
+            <div class="rounded-xl border border-white/10 bg-black/25 p-3"><div class="flex items-center justify-between"><div class="h-2 w-16 rounded bg-mint/50"></div><div class="font-mono text-sm text-mint">144 FPS</div></div><div class="mt-3 flex items-end gap-1.5"><div class="h-6 w-3 rounded-sm bg-mint/60"></div><div class="h-10 w-3 rounded-sm bg-mint/50"></div><div class="h-5 w-3 rounded-sm bg-mint/40"></div><div class="h-12 w-3 rounded-sm bg-mint/60"></div><div class="h-9 w-3 rounded-sm bg-mint/50"></div><div class="h-14 w-3 rounded-sm bg-mint/70"></div></div></div>
+            <div class="rounded-xl border border-white/10 bg-black/25 p-3"><div class="grid grid-cols-4 gap-2 text-center"><div><div class="text-[10px] uppercase text-slate-500" data-en="Now" data-ar="الآن">Now</div><div class="font-mono text-brand-glow">32%</div></div><div><div class="text-[10px] uppercase text-slate-500" data-en="Min" data-ar="الأدنى">Min</div><div class="font-mono text-slate-300">8%</div></div><div><div class="text-[10px] uppercase text-slate-500" data-en="Max" data-ar="الأعلى">Max</div><div class="font-mono text-slate-300">76%</div></div><div><div class="text-[10px] uppercase text-slate-500" data-en="Avg" data-ar="المعدّل">Avg</div><div class="font-mono text-slate-300">41%</div></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ USER GUIDE ============ -->
+  <section id="guide" class="mx-auto max-w-4xl px-5 py-20">
+    <div class="text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand" data-en="Complete manual" data-ar="الدليل الكامل">Complete manual</p>
+      <h2 class="mt-3 text-3xl font-bold text-white md:text-4xl" data-en="User guide — step by step" data-ar="دليل المستخدم — خطوة بخطوة">User guide — step by step</h2>
+      <p class="mt-4 text-slate-400" data-en="A full walkthrough of every app, control and workflow in Pitols." data-ar="شرح كامل لكل تطبيق وأداة وسير عمل في بيتولز.">A full walkthrough of every app, control and workflow in Pitols.</p>
+    </div>
+
+    <!-- Getting started -->
+    <div class="mt-12 rounded-2xl border border-edge bg-panel/50 p-6 md:p-8">
+      <h3 class="text-xl font-bold text-white" data-en="Getting started" data-ar="البداية">Getting started</h3>
+      <ol class="steps mt-5 space-y-3 text-sm text-slate-400">
+        <li data-en="Open Pitols. The home screen shows three tiles — one for each app: Daily Space, Interface Customization, and Metrics. Click a tile to open that app." data-ar="افتح بيتولز. تعرض الشاشة الرئيسية ثلاث بطاقات — واحدة لكل تطبيق: «مساحة اليوم» و«تخصيص الواجهة» و«بيانات». انقر بطاقة لفتح ذلك التطبيق.">Open Pitols. The home screen shows three tiles — one for each app: Daily Space, Interface Customization, and Metrics. Click a tile to open that app.</li>
+        <li data-en="Choose your theme and language in Settings: switch between Dark and Light, and between English and Arabic (the whole app flips to right-to-left in Arabic)." data-ar="اختر السمة واللغة من الإعدادات: بدّل بين الداكن والفاتح، وبين الإنجليزية والعربية (يتحوّل التطبيق بالكامل إلى الاتجاه من اليمين لليسار في العربية).">Choose your theme and language in Settings: switch between Dark and Light, and between English and Arabic (the whole app flips to right-to-left in Arabic).</li>
+        <li data-en="Turn on Individual Application Mode if you want each app to open as its own separate window with its own taskbar icon." data-ar="فعّل «وضع التطبيق المستقل» إن أردت أن يفتح كل تطبيق في نافذته المنفصلة بأيقونته الخاصة على شريط المهام.">Turn on Individual Application Mode if you want each app to open as its own separate window with its own taskbar icon.</li>
+        <li data-en="Pitols keeps everything on your device — there is no account to create and nothing to sign in to." data-ar="يحفظ بيتولز كل شيء على جهازك — لا حساب لإنشائه ولا تسجيل دخول.">Pitols keeps everything on your device — there is no account to create and nothing to sign in to.</li>
+      </ol>
+    </div>
+
+    <!-- Guide: Daily Space -->
+    <div class="mt-8 rounded-2xl border border-edge bg-panel/50 p-6 md:p-8">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-plum/15 text-plum font-bold">١</span>
+        <h3 class="text-xl font-bold text-white">مساحة اليوم · <span data-en="Daily Space" data-ar="مساحة اليوم">Daily Space</span></h3>
+      </div>
+
+      <h4 class="mt-6 font-semibold text-plum" data-en="Creating and writing notes" data-ar="إنشاء الملاحظات وكتابتها">Creating and writing notes</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Click “New note” to create a note. Give it a title and start typing in the editor." data-ar="انقر «ملاحظة جديدة» لإنشاء ملاحظة. أعطها عنوانًا وابدأ الكتابة في المحرّر.">Click “New note” to create a note. Give it a title and start typing in the editor.</li>
+        <li data-en="Use the formatting tools to style your text — change the text color and add a highlight to make key lines stand out." data-ar="استخدم أدوات التنسيق لتنسيق نصك — غيّر لون النص وأضف تظليلًا لإبراز السطور المهمة.">Use the formatting tools to style your text — change the text color and add a highlight to make key lines stand out.</li>
+        <li data-en="Your work saves automatically as you type — there is no Save button to remember." data-ar="يُحفظ عملك تلقائيًا أثناء الكتابة — لا حاجة لتذكّر زر الحفظ.">Your work saves automatically as you type — there is no Save button to remember.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-plum" data-en="Adding images, sound and media" data-ar="إضافة الصور والصوت والوسائط">Adding images, sound and media</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Click “Insert”, then “Image” to place a picture directly inside the note." data-ar="انقر «إدراج» ثم «صورة» لوضع صورة داخل الملاحظة مباشرة.">Click “Insert”, then “Image” to place a picture directly inside the note.</li>
+        <li data-en="Choose “Sound” to attach or record audio; you can set its length in seconds." data-ar="اختر «صوت» لإرفاق مقطع صوتي أو تسجيله؛ ويمكنك تحديد مدّته بالثواني.">Choose “Sound” to attach or record audio; you can set its length in seconds.</li>
+        <li data-en="Media lives inside the note itself, so it travels with the note wherever you view it." data-ar="تبقى الوسائط داخل الملاحظة نفسها، فتنتقل معها أينما عرضتها.">Media lives inside the note itself, so it travels with the note wherever you view it.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-plum" data-en="Categories and organization" data-ar="الفئات والتنظيم">Categories and organization</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Create categories to group your notes — for example General, Work or Personal." data-ar="أنشئ فئات لتجميع ملاحظاتك — مثل «عام» أو «عمل» أو «شخصي».">Create categories to group your notes — for example General, Work or Personal.</li>
+        <li data-en="Give each category a color and an icon; you can even upload your own image as the icon." data-ar="امنح كل فئة لونًا وأيقونة؛ بل يمكنك رفع صورتك الخاصة كأيقونة.">Give each category a color and an icon; you can even upload your own image as the icon.</li>
+        <li data-en="Use the category list to filter, and the search box to find any note instantly by its text." data-ar="استخدم قائمة الفئات للتصفية، وصندوق البحث للعثور على أي ملاحظة فورًا حسب نصّها.">Use the category list to filter, and the search box to find any note instantly by its text.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-plum" data-en="Reminders" data-ar="التذكيرات">Reminders</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Open a note’s reminder and pick a date and time — or use a quick shortcut like Today or This week." data-ar="افتح تذكير الملاحظة واختر تاريخًا ووقتًا — أو استخدم اختصارًا سريعًا مثل «اليوم» أو «هذا الأسبوع».">Open a note’s reminder and pick a date and time — or use a quick shortcut like Today or This week.</li>
+        <li data-en="When the time comes, Pitols shows a notification and plays a built-in chime so you don’t miss it." data-ar="عند حلول الوقت، يعرض بيتولز إشعارًا ويشغّل نغمة مدمجة كي لا يفوتك.">When the time comes, Pitols shows a notification and plays a built-in chime so you don’t miss it.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-plum" data-en="Private notes and locks" data-ar="الملاحظات الخاصة والأقفال">Private notes and locks</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Lock a single note to protect editing it, or lock a whole category so its notes aren’t even listed until you unlock it." data-ar="اقفل ملاحظة واحدة لحماية تعديلها، أو اقفل فئة بأكملها كي لا تظهر ملاحظاتها في القائمة حتى تفتح القفل.">Lock a single note to protect editing it, or lock a whole category so its notes aren’t even listed until you unlock it.</li>
+        <li data-en="Set your lock password when prompted; you’ll enter it to open the locked note or folder later." data-ar="اضبط كلمة مرور القفل عند طلبها؛ وستُدخلها لاحقًا لفتح الملاحظة أو المجلد المقفل.">Set your lock password when prompted; you’ll enter it to open the locked note or folder later.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-plum" data-en="Desktop sticky notes" data-ar="ملاحظات لاصقة على سطح المكتب">Desktop sticky notes</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Pin a note to the desktop to turn it into a sticky note that stays in view while you work." data-ar="ثبّت ملاحظة على سطح المكتب لتحويلها إلى ملاحظة لاصقة تبقى ظاهرة أثناء عملك.">Pin a note to the desktop to turn it into a sticky note that stays in view while you work.</li>
+        <li data-en="Drag a sticky note anywhere, and close it from its own ✕ when you’re done — the original note stays safe in Daily Space." data-ar="اسحب الملاحظة اللاصقة إلى أي مكان، وأغلقها من زر ✕ الخاص بها عند الانتهاء — وتبقى الملاحظة الأصلية محفوظة في «مساحة اليوم».">Drag a sticky note anywhere, and close it from its own ✕ when you’re done — the original note stays safe in Daily Space.</li>
+      </ol>
+    </div>
+
+    <!-- Guide: Interface Customization -->
+    <div class="mt-8 rounded-2xl border border-edge bg-panel/50 p-6 md:p-8">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-brand/15 text-brand font-bold">٢</span>
+        <h3 class="text-xl font-bold text-white">تخصيص الواجهة · <span data-en="Interface Customization" data-ar="تخصيص الواجهة">Interface Customization</span></h3>
+      </div>
+
+      <h4 class="mt-6 font-semibold text-brand" data-en="The custom taskbar" data-ar="شريط المهام المخصّص">The custom taskbar</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Turn on the Pitols taskbar to replace the standard Windows one with your own." data-ar="فعّل شريط مهام بيتولز ليحلّ محل شريط ويندوز القياسي بشريطك الخاص.">Turn on the Pitols taskbar to replace the standard Windows one with your own.</li>
+        <li data-en="Set the shape: choose Square corners or add Rounding, and set the Border thickness — or choose No border." data-ar="اضبط الشكل: اختر «زوايا حادة» أو أضف «استدارة»، واضبط «سُمك الإطار» — أو اختر «بلا إطار».">Set the shape: choose Square corners or add Rounding, and set the Border thickness — or choose No border.</li>
+        <li data-en="Tune the look with the Background colour, Opacity and Background shading controls." data-ar="اضبط المظهر عبر «لون الخلفية» و«الشفافية» و«تدرّج الخلفية».">Tune the look with the Background colour, Opacity and Background shading controls.</li>
+        <li data-en="Set the taskbar height and its direction — pack items to the left or center them." data-ar="اضبط ارتفاع الشريط واتجاهه — رصّ العناصر إلى اليسار أو توسيطها.">Set the taskbar height and its direction — pack items to the left or center them.</li>
+        <li data-en="On more than one screen, use the monitor tabs to give each display its own taskbar settings." data-ar="على أكثر من شاشة، استخدم تبويبات الشاشات لمنح كل شاشة إعدادات شريط مهام خاصة بها.">On more than one screen, use the monitor tabs to give each display its own taskbar settings.</li>
+        <li data-en="Pin and unpin your apps to the bar, and optionally turn on “Hide the real taskbar” to show only yours." data-ar="ثبّت تطبيقاتك على الشريط وألغِ تثبيتها، وفعّل عند الرغبة «إخفاء شريط المهام الأصلي» لإظهار شريطك وحده.">Pin and unpin your apps to the bar, and optionally turn on “Hide the real taskbar” to show only yours.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-brand" data-en="Smooth auto-hide" data-ar="الإخفاء التلقائي السلس">Smooth auto-hide</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Turn on Auto-hide so the taskbar slides away when you’re not using it." data-ar="فعّل «الإخفاء التلقائي» ليختفي شريط المهام عندما لا تستخدمه.">Turn on Auto-hide so the taskbar slides away when you’re not using it.</li>
+        <li data-en="Adjust the reveal and hide timing so the bar appears the instant you reach the edge and tucks away smoothly after." data-ar="اضبط توقيت الظهور والإخفاء ليظهر الشريط لحظة وصولك إلى الحافة ثم ينزوي بسلاسة بعدها.">Adjust the reveal and hide timing so the bar appears the instant you reach the edge and tucks away smoothly after.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-brand" data-en="Wallpapers & the Pexels engine" data-ar="الخلفيات ومحرك Pexels">Wallpapers &amp; the Pexels engine</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Open the Background tool and pick your own image, or drop in a video for a living, moving wallpaper." data-ar="افتح أداة «الخلفية» واختر صورتك الخاصة، أو ضع فيديو للحصول على خلفية حيّة متحرّكة.">Open the Background tool and pick your own image, or drop in a video for a living, moving wallpaper.</li>
+        <li data-en="Type a keyword in the Pexels search box to browse a huge library of photos and videos." data-ar="اكتب كلمة في صندوق بحث Pexels لتصفّح مكتبة ضخمة من الصور والفيديوهات.">Type a keyword in the Pexels search box to browse a huge library of photos and videos.</li>
+        <li data-en="Click a result to apply it as your wallpaper; on multiple screens, set a different one per display." data-ar="انقر نتيجة لتطبيقها كخلفية؛ وعلى شاشات متعددة اضبط خلفية مختلفة لكل شاشة.">Click a result to apply it as your wallpaper; on multiple screens, set a different one per display.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-brand" data-en="Sound themes" data-ar="حزم الأصوات">Sound themes</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Assign your own audio to system moments — startup, shutdown, sign-in and sign-out — and preview each one." data-ar="خصّص أصواتك الخاصة للحظات النظام — التشغيل والإيقاف وتسجيل الدخول والخروج — واستمع لمعاينة كلٍّ منها.">Assign your own audio to system moments — startup, shutdown, sign-in and sign-out — and preview each one.</li>
+        <li data-en="Save your choices as a sound theme so your whole soundscape switches together." data-ar="احفظ اختياراتك كحزمة أصوات كي يتبدّل مشهدك الصوتي كاملًا معًا.">Save your choices as a sound theme so your whole soundscape switches together.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-brand" data-en="Custom & animated cursors" data-ar="مؤشرات مخصّصة ومتحرّكة">Custom &amp; animated cursors</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Pick a cursor scheme, then set its size and color to suit you." data-ar="اختر نظام مؤشر، ثم اضبط حجمه ولونه بما يناسبك.">Pick a cursor scheme, then set its size and color to suit you.</li>
+        <li data-en="Choose an animated pointer for a bit of motion, and apply it in one click." data-ar="اختر مؤشرًا متحرّكًا لبعض الحركة، وطبّقه بنقرة واحدة.">Choose an animated pointer for a bit of motion, and apply it in one click.</li>
+        <li data-en="Changed your mind? Revert to your previous cursor anytime — your original setup is always one click away." data-ar="غيّرت رأيك؟ ارجع إلى مؤشرك السابق في أي وقت — إعدادك الأصلي دائمًا على بُعد نقرة.">Changed your mind? Revert to your previous cursor anytime — your original setup is always one click away.</li>
+      </ol>
+    </div>
+
+    <!-- Guide: Metrics -->
+    <div class="mt-8 rounded-2xl border border-edge bg-panel/50 p-6 md:p-8">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-mint/15 text-mint font-bold">٣</span>
+        <h3 class="text-xl font-bold text-white">بيانات · <span data-en="Metrics" data-ar="بيانات">Metrics</span></h3>
+      </div>
+
+      <h4 class="mt-6 font-semibold text-mint" data-en="Reading the frame rate (FPS)" data-ar="قراءة معدّل الإطارات (FPS)">Reading the frame rate (FPS)</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="The FPS panel shows how many frames per second your screen is drawing right now, updating live." data-ar="تعرض لوحة FPS عدد الإطارات في الثانية التي ترسمها شاشتك الآن، وتتحدّث لحظيًا.">The FPS panel shows how many frames per second your screen is drawing right now, updating live.</li>
+        <li data-en="Each reading is shown four ways: Current, Minimum, Maximum, and the Hourly average — so you can see both the moment and the trend." data-ar="يُعرض كل قياس بأربع طرق: الحالي والأدنى والأعلى والمعدّل بالساعة — لترى اللحظة والاتجاه معًا.">Each reading is shown four ways: Current, Minimum, Maximum, and the Hourly average — so you can see both the moment and the trend.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-mint" data-en="Reading resource usage" data-ar="قراءة استهلاك الموارد">Reading resource usage</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="The Usage panel lists your system’s resource use, each row with the same Current / Min / Max / Hourly-average columns." data-ar="تسرد لوحة «الاستهلاك» استخدام موارد نظامك، وكل صف بالأعمدة نفسها: الحالي / الأدنى / الأعلى / المعدّل بالساعة.">The Usage panel lists your system’s resource use, each row with the same Current / Min / Max / Hourly-average columns.</li>
+        <li data-en="Watch the Current column for what’s busy right now, and the Max column to spot spikes over time." data-ar="راقب عمود «الحالي» لمعرفة ما ينشغل الآن، وعمود «الأعلى» لرصد الذروات عبر الوقت.">Watch the Current column for what’s busy right now, and the Max column to spot spikes over time.</li>
+      </ol>
+
+      <h4 class="mt-6 font-semibold text-mint" data-en="Sending a panel to the desktop" data-ar="إرسال لوحة إلى سطح المكتب">Sending a panel to the desktop</h4>
+      <ol class="steps mt-3 space-y-3 text-sm text-slate-400">
+        <li data-en="Each panel has a gear button on its header. Click it to open the widget options for that panel." data-ar="لكل لوحة زر ترس في رأسها. انقره لفتح خيارات الأداة لتلك اللوحة.">Each panel has a gear button on its header. Click it to open the widget options for that panel.</li>
+        <li data-en="Style the widget the way you like, then deploy it — it appears on your desktop as a live, always-updating overlay." data-ar="نسّق الأداة كما تحب، ثم انشرها — تظهر على سطح مكتبك كطبقة حيّة تتحدّث باستمرار.">Style the widget the way you like, then deploy it — it appears on your desktop as a live, always-updating overlay.</li>
+        <li data-en="Your desktop widgets come back automatically the next time you start your PC. Remove one at any time from the same gear button." data-ar="تعود أدوات سطح المكتب تلقائيًا عند تشغيل جهازك في المرة التالية. أزل أيًّا منها في أي وقت من زر الترس نفسه.">Your desktop widgets come back automatically the next time you start your PC. Remove one at any time from the same gear button.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Experience & privacy -->
+  <section id="experience" class="border-y border-edge/70 bg-panel/50">
+    <div class="mx-auto max-w-6xl px-5 py-20">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand" data-en="The experience" data-ar="التجربة">The experience</p>
+        <h2 class="mt-3 text-3xl font-bold text-white md:text-4xl" data-en="Beautiful, effortless, and private." data-ar="جميل، سهل، وخاص.">Beautiful, effortless, and private.</h2>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        <div class="rounded-2xl border border-edge bg-ink/50 p-7 text-center"><div class="text-4xl">✨</div><h3 class="mt-4 font-semibold text-white" data-en="Effortless & instant" data-ar="سهل وفوري">Effortless &amp; instant</h3><p class="mt-2 text-sm text-slate-400" data-en="Every change previews live and stays light on your PC, so it always feels smooth." data-ar="كل تغيير يظهر مباشرة ويبقى خفيفًا على جهازك، فيبقى الإحساس سلسًا دائمًا.">Every change previews live and stays light on your PC, so it always feels smooth.</p></div>
+        <div class="rounded-2xl border border-edge bg-ink/50 p-7 text-center"><div class="text-4xl">🔒</div><h3 class="mt-4 font-semibold text-white" data-en="Zero tracking" data-ar="بلا تتبّع">Zero tracking</h3><p class="mt-2 text-sm text-slate-400" data-en="No accounts, no analytics, no ads. Nothing about you is collected or sold." data-ar="لا حسابات ولا تحليلات ولا إعلانات. لا يُجمع أو يُباع أي شيء عنك.">No accounts, no analytics, no ads. Nothing about you is collected or sold.</p></div>
+        <div class="rounded-2xl border border-edge bg-ink/50 p-7 text-center"><div class="text-4xl">💾</div><h3 class="mt-4 font-semibold text-white" data-en="Local-only" data-ar="محليّ فقط">Local-only</h3><p class="mt-2 text-sm text-slate-400" data-en="Your notes, settings and personalization all stay on your device — always." data-ar="ملاحظاتك وإعداداتك وتخصيصك تبقى كلها على جهازك — دائمًا.">Your notes, settings and personalization all stay on your device — always.</p></div>
+      </div>
+      <p class="mt-8 text-center text-sm text-slate-500"><span data-en="Read the full" data-ar="اقرأ كامل">Read the full</span> <a href="privacy.html" class="font-medium text-brand hover:text-brand-glow" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 radial-glow"></div>
+    <div class="relative mx-auto max-w-3xl px-5 py-20 text-center">
+      <h2 class="text-3xl font-bold text-white md:text-4xl" data-en="Three apps. One desktop. Yours." data-ar="ثلاثة تطبيقات. سطح مكتب واحد. لك.">Three apps. One desktop. Yours.</h2>
+      <p class="mt-4 text-slate-400" data-en="Pitols arrives on the Microsoft Store on October 1st, 2026." data-ar="يصل بيتولز إلى متجر مايكروسوفت في 1 أكتوبر 2026.">Pitols arrives on the Microsoft Store on October 1st, 2026.</p>
+      <!-- Replace href with your live Store listing at launch: https://apps.microsoft.com/detail/9P1XQB72XNPR -->
+      <a href="#launch" class="mt-8 inline-block rounded-xl bg-gradient-to-r from-brand to-brand-deep px-8 py-4 font-semibold text-ink shadow-lg shadow-brand/20 hover:brightness-110"
+         data-en="Coming to Microsoft Store — Oct 1, 2026" data-ar="قريبًا على متجر مايكروسوفت — 1 أكتوبر 2026">Coming to Microsoft Store — Oct 1, 2026</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-edge/70 bg-ink">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-slate-500 sm:flex-row">
+      <div class="flex flex-col gap-1">
+        <div class="flex items-center gap-2.5">
+          <span class="grid h-6 w-6 place-items-center rounded-md bg-gradient-to-br from-brand to-brand-deep font-mono text-xs font-bold text-ink">P</span>
+          <span dir="ltr">© 2026 R.C.P · Pitols</span>
+        </div>
+        <span class="text-xs text-slate-600">
+          <span data-en="Developed by" data-ar="تطوير">Developed by</span>
+          <bdi dir="ltr" class="font-medium text-slate-400">RUY</bdi>
+          ·
+          <span data-en="Published by" data-ar="نشر">Published by</span>
+          <bdi dir="ltr" class="font-medium text-slate-400">R.C.P</bdi>
+        </span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="privacy.html" class="hover:text-white" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+        <a href="mailto:rcp8323@gmail.com" class="hover:text-white">rcp8323@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Language toggle (English / Arabic) ----
+    (function () {
+      var toggle = document.getElementById('langToggle');
+      function apply(lang) {
+        var root = document.documentElement;
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        document.querySelectorAll('[data-en]').forEach(function (el) {
+          var t = el.getAttribute('data-' + lang);
+          if (t !== null) el.textContent = t;
+        });
+        toggle.textContent = (lang === 'ar') ? 'EN' : 'ع';
+        try { localStorage.setItem('pitols-lang', lang); } catch (e) {}
+      }
+      var saved = 'en';
+      try { saved = localStorage.getItem('pitols-lang') || 'en'; } catch (e) {}
+      apply(saved);
+      toggle.addEventListener('click', function () {
+        apply(document.documentElement.lang === 'ar' ? 'en' : 'ar');
+      });
+    })();
+
+    // ---- Countdown to 1 October 2026 (local time) ----
+    (function () {
+      var target = new Date(2026, 9, 1, 0, 0, 0).getTime(); // month 0-indexed: 9 = October
+      var els = { d: document.getElementById('cd-days'), h: document.getElementById('cd-hours'),
+                  m: document.getElementById('cd-mins'), s: document.getElementById('cd-secs') };
+      var grid = document.getElementById('countdown'), launched = document.getElementById('launched');
+      function pad(n) { return String(n).padStart(2, '0'); }
+      function tick() {
+        var diff = target - Date.now();
+        if (diff <= 0) { grid.classList.add('hidden'); launched.classList.remove('hidden'); clearInterval(timer); return; }
+        var s = Math.floor(diff / 1000);
+        els.d.textContent = Math.floor(s / 86400);
+        els.h.textContent = pad(Math.floor((s % 86400) / 3600));
+        els.m.textContent = pad(Math.floor((s % 3600) / 60));
+        els.s.textContent = pad(s % 60);
+      }
+      tick();
+      var timer = setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
